@@ -493,8 +493,23 @@
       customAlert('Hello, world! - using script tag with type attribute (old)', 'Script Alert #2', 'info');
     }, 2500);
 
+    // Try to load external script
     setTimeout(() => {
-      customAlert('External script would load here (testjs.js not found)', 'Script Alert #3', 'warning');
+      const script = document.createElement('script');
+      script.src = 'javascripts/testjs.js';
+      script.onload = () => {
+        customAlert('External script loaded successfully! 🎉', 'Script Alert #3', 'success');
+        // If the external script has a function, try to call it
+        if (typeof window.testFunction === 'function') {
+          setTimeout(() => {
+            window.testFunction();
+          }, 1000);
+        }
+      };
+      script.onerror = () => {
+        customAlert('External script (testjs.js) not found, but that\'s okay! 😊', 'Script Alert #3', 'warning');
+      };
+      document.head.appendChild(script);
     }, 4000);
 
     // Interactive button ripple effect
