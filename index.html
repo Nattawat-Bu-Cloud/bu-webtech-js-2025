@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World - Premium UI</title>
+  <title>Assignment #1 - Number Checker</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,31 +14,31 @@
     }
 
     body {
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
       background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 20px;
       position: relative;
+      overflow-x: hidden;
     }
 
-    /* Animated Background Gradient */
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* Floating Particles */
     .particles {
-      position: absolute;
+      position: fixed;
       width: 100%;
       height: 100%;
       overflow: hidden;
       z-index: 1;
+      pointer-events: none;
     }
 
     .particle {
@@ -56,227 +56,260 @@
     .particle:nth-child(6) { width: 4px; height: 4px; left: 60%; animation-delay: -10s; }
     .particle:nth-child(7) { width: 6px; height: 6px; left: 70%; animation-delay: -12s; }
     .particle:nth-child(8) { width: 9px; height: 9px; left: 80%; animation-delay: -14s; }
-    .particle:nth-child(9) { width: 5px; height: 5px; left: 90%; animation-delay: -16s; }
-    .particle:nth-child(10) { width: 7px; height: 7px; left: 15%; animation-delay: -18s; }
 
     @keyframes float {
       0% {
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
       }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
       100% {
         transform: translateY(-10vh) rotate(360deg);
         opacity: 0;
       }
     }
 
-    /* Glassmorphism Card */
-    .card {
+    .container {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 60px 80px;
+      padding: 50px 60px;
       border-radius: 25px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
       text-align: center;
-      animation: cardEntrance 2s ease forwards;
-      transform: scale(0.8) translateY(50px);
-      opacity: 0;
+      animation: cardEntrance 1s ease forwards;
       z-index: 10;
       position: relative;
-      overflow: hidden;
+      max-width: 500px;
+      width: 100%;
     }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      animation: shimmer 3s infinite;
-      transform: rotate(45deg);
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-    }
-
-    .card h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: textFloat 3s ease-in-out infinite, colorShift 8s linear infinite;
-      text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 2;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: rgba(255, 255, 255, 0.9);
-      font-weight: 300;
-      margin-top: 20px;
-      animation: fadeInUp 2.5s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-      z-index: 2;
-      position: relative;
-    }
-
-    .glow-button {
-      margin-top: 30px;
-      padding: 15px 40px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      animation: buttonPulse 2s ease-in-out infinite, fadeInUp 3s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-      z-index: 2;
-      position: relative;
-    }
-
-    .glow-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-      filter: brightness(1.1);
-    }
-
-    /* Animations */
     @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+      }
       to {
         opacity: 1;
         transform: scale(1) translateY(0);
       }
     }
 
-    @keyframes textFloat {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+      text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 300;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .info-box h3 {
+      color: white;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .info-box p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .input-group {
+      margin: 30px 0;
+    }
+
+    label {
+      display: block;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 15px 20px;
+      font-size: 1.1rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    input[type="number"]::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+      filter: brightness(1.1);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .popup {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 25px;
+      padding: 40px;
+      min-width: 350px;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: popupSlide 0.4s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes popupSlide {
+      from {
+        transform: scale(0.8) translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .popup-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: bounce 2s ease infinite;
+    }
+
+    @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-15px); }
     }
 
-    @keyframes colorShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .popup h2 {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .popup p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 30px;
+      line-height: 1.5;
     }
 
-    @keyframes buttonPulse {
-      0%, 100% { box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); }
-      50% { box-shadow: 0 10px 40px rgba(102, 126, 234, 0.7); }
+    .popup-btn {
+      padding: 12px 35px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
     }
 
-    /* Interactive Elements */
-    .card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    .popup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .card {
+      .container {
         padding: 40px 30px;
-        margin: 20px;
       }
 
-      .card h1 {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        font-size: 1rem;
-      }
-
-      .glow-button {
-        padding: 12px 30px;
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .card h1 {
+      h1 {
         font-size: 2rem;
       }
-    }
 
-    /* Additional floating elements */
-    .floating-orb {
-      position: absolute;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-      backdrop-filter: blur(10px);
-      animation: orbitFloat 25s infinite linear;
-      z-index: 1;
-    }
-
-    .orb1 {
-      width: 80px;
-      height: 80px;
-      top: 20%;
-      left: 10%;
-      animation-delay: 0s;
-    }
-
-    .orb2 {
-      width: 120px;
-      height: 120px;
-      top: 60%;
-      right: 15%;
-      animation-delay: -8s;
-    }
-
-    .orb3 {
-      width: 60px;
-      height: 60px;
-      bottom: 20%;
-      left: 20%;
-      animation-delay: -16s;
-    }
-
-    @keyframes orbitFloat {
-      0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
-      }
-      25% {
-        transform: translate(30px, -40px) rotate(90deg);
-      }
-      50% {
-        transform: translate(-20px, -60px) rotate(180deg);
-      }
-      75% {
-        transform: translate(-40px, 20px) rotate(270deg);
+      .popup {
+        padding: 30px 20px;
+        min-width: 300px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Floating Particles -->
   <div class="particles">
     <div class="particle"></div>
     <div class="particle"></div>
@@ -286,294 +319,33 @@
     <div class="particle"></div>
     <div class="particle"></div>
     <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
   </div>
 
-  <!-- Floating Orbs -->
-  <div class="floating-orb orb1"></div>
-  <div class="floating-orb orb2"></div>
-  <div class="floating-orb orb3"></div>
+  <div class="container">
+    <h1>🔢 Number Checker</h1>
+    <p class="subtitle">Assignment #1 - JavaScript</p>
 
-  <!-- Main Card -->
-  <div class="card">
-    <h1>Hello World 🌍✨</h1>
-    <p class="subtitle">Welcome to a beautiful digital experience</p>
-    <button class="glow-button" onclick="createRipple(event)">Explore Magic</button>
+    <div class="info-box">
+      <h3>📝 Student Info</h3>
+      <p><strong>NickName:</strong> NongP</p>
+      <p><strong>Favorite Food:</strong> 比萨 (Pizza)</p>
+    </div>
+
+    <div class="input-group">
+      <label for="numberInput">Enter an integer number:</label>
+      <input 
+        type="number" 
+        id="numberInput" 
+        placeholder="Type a number here..."
+        step="1"
+      />
+    </div>
+
+    <button class="btn" onclick="checkNumber()">
+      ✨ Check Number
+    </button>
   </div>
 
-  <script>
-    // Custom popup functions
-    let popupCounter = 0;
-
-    function showCustomPopup(title, message, type = 'info') {
-      popupCounter++;
-      
-      // Create popup overlay
-      const overlay = document.createElement('div');
-      overlay.className = 'popup-overlay';
-      overlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(10px);
-        z-index: 10000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.3s ease-out;
-      `;
-
-      // Create popup container
-      const popup = document.createElement('div');
-      popup.className = 'custom-popup';
-      popup.style.cssText = `
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 20px;
-        padding: 40px;
-        min-width: 350px;
-        max-width: 500px;
-        text-align: center;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        animation: popupSlide 0.4s ease-out;
-        transform: scale(0.8) translateY(30px);
-        position: relative;
-        overflow: hidden;
-      `;
-
-      // Add shimmer effect
-      const shimmer = document.createElement('div');
-      shimmer.style.cssText = `
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-        animation: shimmer 2s infinite;
-        transform: rotate(45deg);
-        pointer-events: none;
-      `;
-      popup.appendChild(shimmer);
-
-      // Popup content
-      const content = document.createElement('div');
-      content.style.cssText = `
-        position: relative;
-        z-index: 2;
-      `;
-
-      // Icon based on type
-      const iconMap = {
-        'info': '💫',
-        'success': '✨',
-        'warning': '⚡',
-        'script': '🚀'
-      };
-      
-      const icon = document.createElement('div');
-      icon.textContent = iconMap[type] || '💫';
-      icon.style.cssText = `
-        font-size: 3rem;
-        margin-bottom: 20px;
-        animation: bounce 2s ease infinite;
-      `;
-
-      const titleEl = document.createElement('h2');
-      titleEl.textContent = title;
-      titleEl.style.cssText = `
-        font-size: 1.8rem;
-        color: white;
-        margin-bottom: 15px;
-        font-weight: 600;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      `;
-
-      const messageEl = document.createElement('p');
-      messageEl.textContent = message;
-      messageEl.style.cssText = `
-        font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 30px;
-        line-height: 1.5;
-      `;
-
-      const closeBtn = document.createElement('button');
-      closeBtn.textContent = 'Got it! ✨';
-      closeBtn.style.cssText = `
-        padding: 12px 30px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        color: white;
-        border: none;
-        border-radius: 25px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-      `;
-
-      closeBtn.onmouseover = () => {
-        closeBtn.style.transform = 'translateY(-2px)';
-        closeBtn.style.boxShadow = '0 15px 35px rgba(102, 126, 234, 0.6)';
-      };
-      
-      closeBtn.onmouseout = () => {
-        closeBtn.style.transform = 'translateY(0)';
-        closeBtn.style.boxShadow = '0 10px 25px rgba(102, 126, 234, 0.4)';
-      };
-
-      closeBtn.onclick = () => {
-        overlay.style.animation = 'fadeOut 0.3s ease-out forwards';
-        setTimeout(() => overlay.remove(), 300);
-      };
-
-      // Assemble popup
-      content.appendChild(icon);
-      content.appendChild(titleEl);
-      content.appendChild(messageEl);
-      content.appendChild(closeBtn);
-      popup.appendChild(content);
-      overlay.appendChild(popup);
-
-      // Add animations
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes fadeOut {
-          from { opacity: 1; }
-          to { opacity: 0; }
-        }
-        @keyframes popupSlide {
-          to {
-            transform: scale(1) translateY(0);
-          }
-        }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes shimmer {
-          0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-          100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-      `;
-      document.head.appendChild(style);
-
-      document.body.appendChild(overlay);
-
-      // Auto close after 10 seconds
-      setTimeout(() => {
-        if (document.contains(overlay)) {
-          overlay.style.animation = 'fadeOut 0.3s ease-out forwards';
-          setTimeout(() => overlay.remove(), 300);
-        }
-      }, 10000);
-    }
-
-    // Replace original alerts with custom popups
-    function customAlert(message, title = 'Hello World!', type = 'script') {
-      showCustomPopup(title, message, type);
-    }
-
-    // Show the script alerts with delay
-    setTimeout(() => {
-      customAlert('Hello, world!', 'Script Alert #1', 'script');
-    }, 1000);
-
-    setTimeout(() => {
-      customAlert('Hello, world! - using script tag with type attribute (old)', 'Script Alert #2', 'info');
-    }, 2500);
-
-    // Try to load external script
-    setTimeout(() => {
-      const script = document.createElement('script');
-      script.src = 'javascripts/testjs.js';
-      script.onload = () => {
-        customAlert('External script loaded successfully! 🎉', 'Script Alert #3', 'success');
-        // If the external script has a function, try to call it
-        if (typeof window.testFunction === 'function') {
-          setTimeout(() => {
-            window.testFunction();
-          }, 1000);
-        }
-      };
-      script.onerror = () => {
-        customAlert('External script (testjs.js) not found, but that\'s okay! 😊', 'Script Alert #3', 'warning');
-      };
-      document.head.appendChild(script);
-    }, 4000);
-
-    // Interactive button ripple effect
-    function createRipple(event) {
-      const button = event.currentTarget;
-      const circle = document.createElement('span');
-      const diameter = Math.max(button.clientWidth, button.clientHeight);
-      const radius = diameter / 2;
-      
-      const rect = button.getBoundingClientRect();
-      circle.style.width = circle.style.height = diameter + 'px';
-      circle.style.left = (event.clientX - rect.left - radius) + 'px';
-      circle.style.top = (event.clientY - rect.top - radius) + 'px';
-      circle.style.position = 'absolute';
-      circle.style.borderRadius = '50%';
-      circle.style.background = 'rgba(255, 255, 255, 0.6)';
-      circle.style.animation = 'ripple 0.6s ease-out';
-      circle.style.pointerEvents = 'none';
-      
-      const ripple = button.querySelector('span');
-      if (ripple) {
-        ripple.remove();
-      }
-      
-      button.style.position = 'relative';
-      button.style.overflow = 'hidden';
-      button.appendChild(circle);
-      
-      // Add ripple animation
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes ripple {
-          to {
-            transform: scale(4);
-            opacity: 0;
-          }
-        }
-      `;
-      if (!document.querySelector('#ripple-style')) {
-        style.id = 'ripple-style';
-        document.head.appendChild(style);
-      }
-      
-      // Show custom popup instead of alert
-      setTimeout(() => {
-        showCustomPopup('Magic Activated!', '✨ Welcome to the magical world of web design! ✨', 'success');
-      }, 300);
-    }
-
-    // Add mouse movement parallax effect
-    document.addEventListener('mousemove', (e) => {
-      const card = document.querySelector('.card');
-      const orbs = document.querySelectorAll('.floating-orb');
-      
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
-      
-      card.style.transform = `perspective(1000px) rotateY(${(x - 0.5) * 10}deg) rotateX(${(y - 0.5) * -10}deg)`;
-      
-      orbs.forEach((orb, index) => {
-        const speed = (index + 1) * 0.5;
-        orb.style.transform += ` translate(${(x - 0.5) * speed * 20}px, ${(y - 0.5) * speed * 20}px)`;
-      });
-    });
-  </script>
+  <script src="javascripts/script.js"></script>
 </body>
 </html>
