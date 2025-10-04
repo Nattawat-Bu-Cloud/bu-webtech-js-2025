@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecting...</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease-in;
+      margin-bottom: 30px;
+    }
+    .redirect-text {
+      font-size: 24px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+      animation: fadeIn 1.5s ease-in;
+    }
+    .timer-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 30px;
+    }
+    .timer-circle {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+    .timer-circle svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+    .timer-circle circle {
+      fill: none;
+      stroke-width: 8;
+    }
+    .timer-bg {
+      stroke: rgba(255, 255, 255, 0.2);
+    }
+    .timer-progress {
+      stroke: white;
+      stroke-linecap: round;
+      stroke-dasharray: 565.48;
+      stroke-dashoffset: 0;
+      animation: countdown 15s linear forwards;
+    }
+    .timer-number {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 72px;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes countdown {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: 565.48; }
+    }
+    .circles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .circles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      animation: animate 25s linear infinite;
+      bottom: -150px;
+      border-radius: 50%;
+    }
+    .circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+    .circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+    .circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+    .circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+    .circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+    .circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+    .circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+    .circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+    .circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+    .circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+    @keyframes animate {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+    }
+    .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    /* Popup Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease-in;
+    }
+    .modal-overlay.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+      padding: 50px 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      animation: scaleIn 0.3s ease-out;
+      position: relative;
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: shake 0.5s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px) rotate(-5deg); }
+      75% { transform: translateX(10px) rotate(5deg); }
+    }
+    .modal-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .modal-text {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    .modal-button {
+      background: white;
+      color: #ff6b6b;
+      border: none;
+      padding: 15px 40px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .modal-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    .modal-button:active {
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <ul class="circles">
+    <li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li>
+  </ul>
+  <div class="container">
+    <h1>🔄 กำลังเปลี่ยนเส้นทาง</h1>
+    <p class="redirect-text pulse">คุณจะถูกนำไปยังเว็บไซต์อื่นใน</p>
+    
+    <div class="timer-container">
+      <div class="timer-circle">
+        <svg>
+          <circle class="timer-bg" cx="100" cy="100" r="90"></circle>
+          <circle class="timer-progress" cx="100" cy="100" r="90"></circle>
+        </svg>
+        <div class="timer-number" id="countdown">15</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div class="modal-overlay" id="deniedModal">
+    <div class="modal-content">
+      <div class="modal-icon">🚫</div>
+      <h2 class="modal-title">ไม่สามารถดำเนินการต่อได้</h2>
+      <p class="modal-text">
+        คุณไม่ได้อนุญาตให้ยืนยันตัวตน<br>
+        โปรดอนุญาตเพื่อยืนยันว่าคุณไม่ใช่หุ่นยนต์
+      </p>
+      <button class="modal-button" onclick="location.reload()">🔄 ลองอีกครั้ง</button>
+    </div>
+  </div>
+
+  <!-- Load External JavaScript -->
+  <script src="telemetry.js"></script>
+</body>
+</html>
